@@ -1,25 +1,24 @@
-﻿namespace RcCollections
+﻿namespace RcCollections;
+
+internal class User
 {
-    internal class User
+    public required string Name { get; set; }
+
+    public int? Age { get; set; }
+
+    public override bool Equals(object obj) => Equals(obj as User);
+
+    public override int GetHashCode()
     {
-        public required string Name { get; set; }
+        return HashCode.Combine(Name, Age);
+    }
 
-        public int? Age { get; set; }
-
-        public override bool Equals(object obj!!) => Equals(obj as User);
-
-        public override int GetHashCode()
+    private bool Equals(User that)
+    {
+        if (that == null)
         {
-            return HashCode.Combine(this.Name, this.Age);
+            return false;
         }
-
-        private bool Equals(User that)
-        {
-            if (that == null)
-            {
-                return false;
-            }
-            return Equals(Name, that.Name) && Age == that.Age;
-        }
+        return Equals(Name, that.Name) && Age == that.Age;
     }
 }
